@@ -1,10 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 
-// import Login from '~/Screens/Login/Login';
-// import CreateAccount from '~/Screens/Login/CreateAccount';
 import Welcome from './Login/Welcome';
+import Login from './Login/Login';
+import CreateAccount from './Login/CreateAccount';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +26,7 @@ const LoginNavigator = () => {
           },
         }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -50,7 +49,7 @@ const LoginNavigator = () => {
             fontWeight: 'bold',
           },
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };
