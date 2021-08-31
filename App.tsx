@@ -11,11 +11,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>test up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
   );
 };
+
+export default App;
