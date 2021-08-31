@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Welcome from './Login/Welcome';
 import Login from './Login/Login';
-import CreateAccount from './Login/CreateAccount';
+import Signup from './Login/Signup';
 
 const Stack = createStackNavigator();
 
@@ -40,7 +40,7 @@ const LoginNavigator = () => {
       />
       <Stack.Screen
         name="CreateAccount"
-        component={CreateAccount}
+        component={Signup}
         options={{
           title: 'Sign Up',
           headerTransparent: true,
