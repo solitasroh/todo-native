@@ -7,7 +7,7 @@ import Signup from './Login/Signup';
 
 const Stack = createStackNavigator();
 
-const LoginNavigator = () => {
+const LoginNavigator: React.FC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

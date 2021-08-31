@@ -21,7 +21,9 @@ type NavigationProp = StackNavigationProp<LoginNaviParamList, 'Welcome'>;
 interface Props {
   navigation: NavigationProp;
 }
-const Login = ({ navigation }: Props) => {
+
+const Login: React.FC<Props> = (props: Props) => {
+  console.log(props);
   return (
     <Container>
       <Text>Login</Text>
