@@ -24,11 +24,7 @@ const LoginNavigator: React.FC = () => {
         component={Login}
         options={{
           title: 'Login',
-          headerTransparent: true,
-          headerTintColor: '#E70915',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+          headerShown: false,
         }}
       />
 

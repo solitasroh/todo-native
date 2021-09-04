@@ -5,7 +5,6 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 const Container = styled.View`

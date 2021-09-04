@@ -22,7 +22,7 @@ interface Props {
   style?: undefined;
   clearMode?: boolean;
   onChangeText?: (text: string) => void;
-  value: string;
+  value?: string;
 }
 
 const Input: React.FC<Props> = ({
