@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
-import logo from '@assets/logo.png';
 
 const Container = styled.View`
   flex: 1;
@@ -36,7 +35,8 @@ const AuthLayout: React.FC<Props> = ({ children }: Props) => {
     console.log('touch ...');
     Keyboard.dismiss();
   };
-  console.log(children);
+
+  const logoImage = require('@assets/logo.png');
 
   return (
     <Container>
@@ -47,7 +47,7 @@ const AuthLayout: React.FC<Props> = ({ children }: Props) => {
         behavior="position"
         keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
       >
-        <Logo source={logo} resizeMode="stretch"></Logo>
+        <Logo source={logoImage} resizeMode="stretch"></Logo>
         {children}
       </KeyboardAvoidingView>
     </Container>

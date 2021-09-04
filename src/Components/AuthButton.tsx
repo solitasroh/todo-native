@@ -3,23 +3,30 @@ import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 
-const Container = styled.TouchableOpacity<{ active: boolean }>`
+const Container = styled.TouchableOpacity<{
+  active: boolean;
+}>`
   flex-direction: row;
   width: 100%;
   height: 56px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border: 0px;
   border-radius: 14px;
   background-color: ${(props) => (props.active ? '#2ab79f' : '#FFFFFF')};
   opacity: ${(props) => (props.disabled ? '0.5' : '1')};
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 `;
+
 const ButtonLabel = styled.Text<{ active: boolean }>`
   color: ${(props) => (props.active ? '#FFFFFF' : '#000000')};
   font-size: 15px;
   font-weight: 600;
-  flex: 1;
   text-align: center;
+`;
+
+const ButtonIcon = styled(Ionicons)`
+  margin-right: 5%;
 `;
 
 interface ButtonProps {
@@ -30,10 +37,6 @@ interface ButtonProps {
   icon?: string;
   onPress?: () => void;
 }
-const ButtonIcon = styled(Ionicons)`
-  flex: 0.2;
-  margin: 10px;
-`;
 
 const AuthButton: React.FC<ButtonProps> = ({
   label,

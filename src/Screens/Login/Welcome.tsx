@@ -37,7 +37,7 @@ const Welcome: React.FC<Props> = ({ navigation }: Props) => {
         active={true}
         disabled={false}
         onPress={goToSignup}
-        icon="checkmark"
+        icon="mail-sharp"
       />
 
       <TouchableOpacity onPress={goToLogin}>
