@@ -15,6 +15,7 @@
     "paths": {
       "@Screens/*": ["src/Screens/*"],
       "@Components/*": ["src/Components/*"],
+      "@Apollo/*": ["src/Apollo/*"],
       "@assets/*": ["assets/*"]
     }
   },

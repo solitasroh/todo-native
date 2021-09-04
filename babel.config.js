@@ -11,7 +11,14 @@ module.exports = function (api) {
             '@Components': './src/Components',
             '@Screens': './src/Screens',
             '@assets': './assets',
+            '@Apollo': './src/Apollo',
           },
+        },
+      ],
+      [
+        'module:react-native-dotenv',
+        {
+          moduleName: '@env',
         },
       ],
     ],
