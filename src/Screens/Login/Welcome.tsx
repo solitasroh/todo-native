@@ -1,43 +1,56 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import Button from './Button';
+
+import AuthButton from '@Components/AuthButton';
+import AuthLayout from '@Components/AuthLayout';
 
 export type LoginNaviParamList = {
   Welcome: undefined;
   Login: undefined;
   CreateAccount: undefined;
 };
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: #fdf6f0;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-`;
+
 type NavigationProp = StackNavigationProp<LoginNaviParamList, 'Welcome'>;
 
 interface Props {
   navigation: NavigationProp;
 }
-const Welcome = ({ navigation }: Props) => {
+
+const LoginLink = styled.Text`
+  color: #0000001f;
+  font-weight: 600;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: underline #0000001f;
+`;
+
+const Welcome: React.FC<Props> = ({ navigation }: Props) => {
+  const goToSignup = () => navigation.navigate('CreateAccount');
+  const goToLogin = () => navigation.navigate('Login');
   return (
-    <Container>
-      <Button
-        style={{ marginBottom: 24 }}
-        label="로그인"
-        onPress={() => {
-          navigation.navigate('Login');
-        }}
+    <AuthLayout>
+      <AuthButton
+        style={{ marginBottom: 10 }}
+        label="새로운 계정으로 시작하기"
+        active={true}
+        disabled={false}
+        onPress={goToSignup}
+        icon="checkmark"
       />
-      <Button
-        style={{ marginBottom: 24 }}
+
+      <TouchableOpacity onPress={goToLogin}>
+        <LoginLink>이미 계정이 있으신가요?</LoginLink>
+      </TouchableOpacity>
+
+      {/* <AuthButton
+        style={{ marginBottom: 0 }}
         label="회원가입"
-        onPress={() => {
-          navigation.navigate('CreateAccount');
-        }}
-      />
-    </Container>
+        active={false}
+        onPress={goToLogin}
+      /> */}
+    </AuthLayout>
   );
 };
 

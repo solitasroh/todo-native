@@ -11,9 +11,11 @@
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["*"]
+      "@Screens/*": ["src/Screens/*"],
+      "@Components/*": ["src/Components/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "exclude": ["node_modules", "babel.config.js"],

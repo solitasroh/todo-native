@@ -15,17 +15,10 @@ const LoginNavigator: React.FC = () => {
         component={Welcome}
         options={{
           title: 'Welcome',
-          //headerTransparent : true,
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          //headerTintColor : '#E70915',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+          headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="Login"
         component={Login}
@@ -38,6 +31,7 @@ const LoginNavigator: React.FC = () => {
           },
         }}
       />
+
       <Stack.Screen
         name="CreateAccount"
         component={Signup}

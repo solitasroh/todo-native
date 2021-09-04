@@ -29,4 +29,12 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
   },
+  setting: {
+    'import/parser': {
+      '@typescript-eslint/parser': ['*.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {},
+    },
+  },
 };

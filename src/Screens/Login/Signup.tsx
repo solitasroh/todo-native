@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import Input from './Input';
-import Button from './Button';
+import AuthButton from '@Components/AuthButton';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -120,7 +120,7 @@ const Signup: React.FC<Props> = ({ navigation }: Props) => {
         }}
       />
       <ErrorField>{errors.userPW && errors.userPW.message}</ErrorField>
-      <Button
+      <AuthButton
         style={{ marginBottom: 24, width: '90%' }}
         label="Sign up"
         onPress={handleSubmit(onSubmit, onError)}
