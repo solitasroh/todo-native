@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
+import AddButton from './AddButton';
+import TodoList from './ToDoList';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -12,7 +14,10 @@ const Container = styled.SafeAreaView`
 const Temp: React.FC = () => {
   return (
     <Container>
-      <Text> 임시 </Text>
+      <Container>
+        <TodoList></TodoList>
+      </Container>
+      <AddButton />
     </Container>
   );
 };
