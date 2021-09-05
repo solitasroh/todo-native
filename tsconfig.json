@@ -16,7 +16,8 @@
       "@Screens/*": ["src/Screens/*"],
       "@Components/*": ["src/Components/*"],
       "@Apollo/*": ["src/Apollo/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@Utils/*": ["src/Utils/*"]
     }
   },
   "exclude": ["node_modules", "babel.config.js"],

@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+  Alert,
   ImageURISource,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -31,25 +33,30 @@ declare function require(name: string): ImageURISource;
 
 const AuthLayout: React.FC<Props> = ({ children }: Props) => {
   const dismissKeyboard = () => {
-    console.log('touch ...');
     Keyboard.dismiss();
   };
 
   const logoImage = require('@assets/logo.png');
 
   return (
-    <Container>
-      <KeyboardAvoidingView
-        style={{
-          width: '100%',
-        }}
-        behavior="position"
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
-      >
-        <Logo source={logoImage} resizeMode="stretch"></Logo>
-        {children}
-      </KeyboardAvoidingView>
-    </Container>
+    <TouchableWithoutFeedback
+      onPress={dismissKeyboard}
+      disabled={Platform.OS === 'web'}
+      style={{ flex: 1 }}
+    >
+      <Container>
+        <KeyboardAvoidingView
+          style={{
+            width: '100%',
+          }}
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
+        >
+          <Logo source={logoImage} resizeMode="stretch"></Logo>
+          {children}
+        </KeyboardAvoidingView>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

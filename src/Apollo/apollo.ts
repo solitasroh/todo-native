@@ -8,10 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { APOLLO_SERVER_IP } from '@env';
 
 const httpLink = createHttpLink({
-  uri: APOLLO_SERVER_IP,
+  uri: `${APOLLO_SERVER_IP}`,
 });
 
-export const isLoginVar = makeVar(true);
+export const isLoginVar = makeVar(false);
 
 export const accessTokenVar = makeVar('');
 

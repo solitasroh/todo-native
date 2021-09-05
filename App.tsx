@@ -7,7 +7,7 @@ import { useAssets } from 'expo-asset';
 import { ApolloProvider, useReactiveVar } from '@apollo/client';
 import { client, isLoginVar } from '@Apollo/apollo';
 import MainNavigator from '@Screens/MainNavigator';
-
+import { APOLLO_SERVER_IP } from '@env';
 /*
   Apollo/apollo.ts 코드 
 
@@ -20,7 +20,7 @@ import MainNavigator from '@Screens/MainNavigator';
 */
 const App: React.FC = () => {
   const isLoggedIn = useReactiveVar(isLoginVar);
-
+  console.log(APOLLO_SERVER_IP);
   const [assets] = useAssets([require('./assets/logo.png')]);
   if (!assets) {
     return <AppLoading></AppLoading>;

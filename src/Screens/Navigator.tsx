@@ -33,11 +33,7 @@ const LoginNavigator: React.FC = () => {
         component={Signup}
         options={{
           title: 'Sign Up',
-          headerTransparent: true,
-          headerTintColor: '#515E63',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

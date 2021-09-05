@@ -1,25 +1,14 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import styled from 'styled-components/native';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
-import Input from './Input';
+import { Controller, useForm } from 'react-hook-form';
+
 import AuthButton from '@Components/AuthButton';
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: #fdf6f0;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ErrorField = styled.Text`
-  color: red;
-  font-weight: 500;
-  text-align: left;
-  width: 90%;
-  margin-bottom: 16px;
-  margin-top: 5px;
-`;
+import AuthInput from '@Components/AuthInput';
+import AuthLayout from '@Components/AuthLayout';
+import { EMAIL_PATTERN } from '@Utils/Regex';
+import { ApolloError, useMutation } from '@apollo/client';
+import { Auth, SIGNUP, SignupInput } from '@Apollo/auth.query';
+import { Alert } from 'react-native';
 
 export type LoginNaviParamList = {
   Welcome: undefined;
@@ -32,35 +21,55 @@ interface Props {
   navigation: NavigationProp;
 }
 const Signup: React.FC<Props> = ({ navigation }: Props) => {
-  console.log(navigation);
-
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      userName: '',
-      userEmail: '',
-      userPW: '',
-    },
-  });
+  } = useForm<SignupInput>({});
 
-  const onSubmit = (data: FieldValues) => {
-    // if (loading) {
-    //   return;
-    // }
+  const onCompleted = (data: { signup: Auth }): void => {
+    Alert.alert(
+      'Success',
+      '계정이 생성되었습니다. 로그인화면으로 이동합니다.',
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.navigate('Login');
+          },
+        },
+      ],
+    );
+  };
+  const onMutationError = (error: ApolloError): void => {
+    error.graphQLErrors.map((err) => {
+      if (err.extensions?.response?.error === 'Conflict') {
+        setError('email', { message: 'E-mail이 이미 존재합니다.' });
+      }
+    });
+  };
+
+  const [signup, { error, data, loading }] = useMutation<
+    { signup: Auth },
+    { data: SignupInput }
+  >(SIGNUP, { onCompleted, onError: onMutationError });
+
+  const onSubmit = async (data: SignupInput) => {
+    if (loading) {
+      return;
+    }
     console.log(data);
-    // TODO: error가 존재하면 아래 로직이 수행되면 안된다.
-    // await signup({
-    //   variables: {
-    //     data: {
-    //       email: data.userEmail,
-    //       password: data.userPW,
-    //       name: data.userName,
-    //     },
-    //   },
-    // });
+    //TODO: error가 존재하면 아래 로직이 수행되면 안된다.
+    await signup({
+      variables: {
+        data: {
+          email: data.email,
+          password: data.password,
+          name: data.name,
+        },
+      },
+    });
   };
   const onError = (_error: Record<string, unknown>): void => {
     console.log(_error);
@@ -68,64 +77,73 @@ const Signup: React.FC<Props> = ({ navigation }: Props) => {
   };
 
   return (
-    <Container>
+    <AuthLayout>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input
+          <AuthInput
             placeholder="E-mail"
             keyboardType="email-address"
             onChangeText={onChange}
             value={value}
+            error={errors.email && errors.email.message}
           />
         )}
-        name="userEmail"
+        name="email"
         rules={{
           required: {
             value: true,
             message: 'e-mail이 입력되지 않았습니다',
           },
-          // pattern: {
-          //   value: EMAIL_PATTERN,
-          //   message: 'email 형식이 아닙니다',
-          // },
+          pattern: {
+            value: EMAIL_PATTERN,
+            message: 'email 형식이 아닙니다',
+          },
         }}
       />
-      <ErrorField>{errors.userEmail && errors.userEmail.message}</ErrorField>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input placeholder="Name" onChangeText={onChange} value={value} />
+          <AuthInput
+            placeholder="Name"
+            onChangeText={onChange}
+            value={value}
+            error={errors.name && errors.name.message}
+          />
         )}
-        name="userName"
+        name="name"
         rules={{
           required: { value: true, message: '이름이 입력되지 않았습니다' },
         }}
       />
-      <ErrorField>{errors.userName && errors.userName.message}</ErrorField>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input
+          <AuthInput
             placeholder="Password"
             secureTextEntry={true}
             onChangeText={onChange}
             value={value}
+            error={errors.password && errors.password.message}
+            lastOne={true}
           />
         )}
-        name="userPW"
+        name="password"
         rules={{
-          required: { value: true, message: '비밀번호가 입력되지 않았습니다' },
+          required: {
+            value: true,
+            message: '비밀번호가 입력되지 않았습니다',
+          },
           minLength: { value: 8, message: '8자 이상 입력해야합니다.' },
         }}
       />
-      <ErrorField>{errors.userPW && errors.userPW.message}</ErrorField>
+
       <AuthButton
-        style={{ marginBottom: 24, width: '90%' }}
-        label="Sign up"
+        label="새로운 계정을 생성합니다"
+        active={true}
         onPress={handleSubmit(onSubmit, onError)}
       />
-    </Container>
+    </AuthLayout>
   );
 };
 

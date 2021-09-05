@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  width: 90%;
   height: 40px;
   padding-left: 16px;
   padding-right: 16px;

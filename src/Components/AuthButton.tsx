@@ -12,7 +12,7 @@ const Container = styled.TouchableOpacity<{
   justify-content: center;
   align-items: center;
   border: 0px;
-  border-radius: 14px;
+  border-radius: 12px;
   background-color: ${(props) => (props.active ? '#2ab79f' : '#FFFFFF')};
   opacity: ${(props) => (props.disabled ? '0.5' : '1')};
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -46,16 +46,10 @@ const AuthButton: React.FC<ButtonProps> = ({
   onPress,
   icon,
 }: ButtonProps) => {
-  const press = () => {
-    console.log('pressed button');
-    if (onPress) {
-      onPress();
-    }
-  };
   return (
     <Container
       style={style}
-      onPress={press}
+      onPress={onPress}
       disabled={disabled}
       active={active ?? false}
     >
