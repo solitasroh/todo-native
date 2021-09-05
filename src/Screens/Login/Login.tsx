@@ -1,12 +1,16 @@
 import React from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
-import { EMAIL_PATTERN } from '@Utils/Regex';
+import { useMutation } from '@apollo/client';
+import { userLogin } from '@Apollo/apollo';
 
 import AuthButton from '@Components/AuthButton';
 import AuthInput from '@Components/AuthInput';
 import AuthLayout from '@Components/AuthLayout';
+import { Auth, LOGIN, LoginInput } from '@Apollo/auth.query';
+
+import { EMAIL_PATTERN } from '@Utils/Regex';
 
 export type LoginNaviParamList = {
   Welcome: undefined;
@@ -14,13 +18,32 @@ export type LoginNaviParamList = {
   CreateAccount: undefined;
 };
 
-type NavigationProp = StackNavigationProp<LoginNaviParamList, 'Welcome'>;
+type NavigationProp = StackNavigationProp<LoginNaviParamList, 'Login'>;
 interface Props {
   navigation: NavigationProp;
 }
 
 const Login: React.FC<Props> = (props: Props) => {
-  console.log(props);
+  const [login] = useMutation<{ login: Auth }, { data: LoginInput }>(LOGIN, {
+    onCompleted: ({ login }) => {
+      console.log(`data: ${login.accessToken}`);
+      userLogin(login.accessToken);
+    },
+    onError: (error) => {
+      console.log(error);
+      error.graphQLErrors.map((err) => {
+        console.log(err.message);
+        if (err.message === 'Invalid password') {
+          setError('password', { message: 'password가 일치하지 않습니다.' });
+        }
+
+        if (err.message === 'email could not found') {
+          setError('email', { message: '이메일을 찾을 수 없습니다.' });
+        }
+      });
+    },
+  });
+
   const {
     control,
     handleSubmit,
@@ -28,20 +51,25 @@ const Login: React.FC<Props> = (props: Props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      userEmail: '',
+      email: '',
       password: '',
     },
   });
 
-  const onSubmit = (data: FieldValues) => {
-    //console.log(data);
-
-    setError('password', { message: 'password is invalid' });
+  const onSubmit = async (data: LoginInput) => {
+    await login({
+      variables: {
+        data: {
+          email: data.email,
+          password: data.password,
+        },
+      },
+    });
     return;
   };
 
   const onError = (_error: Record<string, unknown>): void => {
-    //console.log(_error);
+    console.log(_error);
     return;
   };
 
@@ -54,10 +82,10 @@ const Login: React.FC<Props> = (props: Props) => {
             placeholder="e-mail"
             onChangeText={onChange}
             value={value}
-            error={errors.userEmail && errors.userEmail.message}
+            error={errors.email && errors.email.message}
           />
         )}
-        name="userEmail"
+        name="email"
         rules={{
           required: {
             value: true,

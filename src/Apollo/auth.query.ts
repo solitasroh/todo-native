@@ -16,8 +16,10 @@ export const SIGNUP = gql`
 `;
 export const LOGIN = gql`
   mutation login($data: LoginInput!) {
-    accessToken
-    refreshToken
+    login(data: $data) {
+      accessToken
+      refreshToken
+    }
   }
 `;
 

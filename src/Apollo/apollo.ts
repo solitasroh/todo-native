@@ -15,8 +15,9 @@ export const isLoginVar = makeVar(false);
 
 export const accessTokenVar = makeVar('');
 
-const userLogin = async (accessToken: string) => {
+export const userLogin = async (accessToken: string) => {
   await AsyncStorage.setItem('accessToken', accessToken);
+  isLoginVar(true);
   accessTokenVar(accessToken);
 };
 

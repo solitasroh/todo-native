@@ -18,9 +18,9 @@ import { APOLLO_SERVER_IP } from '@env';
   그러면서 MainNavigator를 호출하게 됨
   MainNavigator에 Todo 관련 화면 및 코드 작성가능!!!
 */
+
 const App: React.FC = () => {
   const isLoggedIn = useReactiveVar(isLoginVar);
-  console.log(APOLLO_SERVER_IP);
   const [assets] = useAssets([require('./assets/logo.png')]);
   if (!assets) {
     return <AppLoading></AppLoading>;
