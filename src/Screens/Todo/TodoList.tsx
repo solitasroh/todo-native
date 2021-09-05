@@ -1,11 +1,12 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import EmptyItem from './EmptyItem';
-import ToDoItem from './ToDoItem';
+import ToDoItem from './TodoItem';
 
 const List = styled(FlatList)`
   flex: 1;
+  width: 100%;
 `;
 
 interface iTodo {
@@ -25,7 +26,7 @@ const todoList: iTodo[] = [
 ];
 
 const TodoList = () => {
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }: { item: iTodo }) => (
     <ToDoItem index={item.index} title={item.title}></ToDoItem>
   );
 
@@ -33,8 +34,9 @@ const TodoList = () => {
     <List
       data={todoList}
       ListEmptyComponent={<EmptyItem />}
-      keyExtractor={item => item.index}
-      renderItem={renderItem}></List>
+      keyExtractor={(item) => item.index}
+      renderItem={renderItem}
+    ></List>
   );
 };
 

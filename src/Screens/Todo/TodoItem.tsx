@@ -14,14 +14,17 @@ const ItemContainer = styled.View`
   padding: 8px 16px;
   border-radius: 8px;
   align-items: center;
+  width: 100%;
 `;
 
 const TitleLabel = styled.Text`
   flex: 1;
+  width: 100%;
   color: black;
 `;
 
-const ToDoItem = ({title, index}: TodoStuff) => {
+const ToDoItem = ({ title, index }: TodoStuff) => {
+  console.log(title);
   return (
     <ItemContainer>
       <TitleLabel>{title}</TitleLabel>

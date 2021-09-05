@@ -1,4 +1,5 @@
 import React from 'react';
+import { ImageURISource } from 'react-native';
 import Styled from 'styled-components/native';
 
 const Container = Styled.SafeAreaView`
@@ -13,16 +14,16 @@ const ButtonContainer = Styled.TouchableOpacity`
 `;
 
 const Icon = Styled.Image``;
-
+declare function require(name: string): ImageURISource;
 interface Props {
   onPress?: () => void;
 }
 
-const AddButton : React.FC<Props> = ({onPress}: Props) => {
+const AddButton: React.FC<Props> = ({ onPress }: Props) => {
   return (
     <Container>
       <ButtonContainer onPress={onPress}>
-        <Icon source={require('@assets/Images/add.png')} />
+        <Icon source={require('@assets/add.png')} />
       </ButtonContainer>
     </Container>
   );

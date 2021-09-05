@@ -11,7 +11,7 @@ const httpLink = createHttpLink({
   uri: APOLLO_SERVER_IP,
 });
 
-export const isLoginVar = makeVar(false);
+export const isLoginVar = makeVar(true);
 
 export const accessTokenVar = makeVar('');
 
