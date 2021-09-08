@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
-import AddButton from './AddButton';
 import TodoList from './TodoList';
 
 const Container = styled.SafeAreaView`
@@ -11,14 +10,18 @@ const Container = styled.SafeAreaView`
   justify-content: center;
   width: 100%;
 `;
-
+const HeaderContainer = styled.View`
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+`;
 const Temp: React.FC = () => {
   return (
     <Container>
       <Container>
+        <HeaderContainer/>
         <TodoList></TodoList>
       </Container>
-      <AddButton />
     </Container>
   );
 };

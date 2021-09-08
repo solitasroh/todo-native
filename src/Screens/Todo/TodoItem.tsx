@@ -5,6 +5,7 @@ import DeleteButton from './DeleteButton';
 interface TodoStuff {
   title: string;
   index: number;
+  onDelete : ()=>void;
 }
 
 const ItemContainer = styled.View`
@@ -23,12 +24,12 @@ const TitleLabel = styled.Text`
   color: black;
 `;
 
-const ToDoItem = ({ title, index }: TodoStuff) => {
+const ToDoItem = ({ title, index , onDelete }: TodoStuff) => {
   console.log(title);
   return (
     <ItemContainer>
       <TitleLabel>{title}</TitleLabel>
-      <DeleteButton></DeleteButton>
+      <DeleteButton onDelete = {onDelete} ></DeleteButton>
     </ItemContainer>
   );
 };

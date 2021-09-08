@@ -11,9 +11,12 @@ const Icon = styled.Image`
   height: 24px;
 `;
 
-const DeleteButton: React.FC = () => {
+interface Props{
+  onDelete: ()=>void;
+}
+const DeleteButton: React.FC<Props> = ({ onDelete} : Props) => {
   return (
-    <DeleteButtonContainer>
+    <DeleteButtonContainer onPress={onDelete}>
       <Icon source={require('@assets/remove.png')}></Icon>
     </DeleteButtonContainer>
   );
