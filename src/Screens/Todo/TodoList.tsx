@@ -59,10 +59,13 @@ const TodoList = () => {
     SetTodoList(list);
   };
   const addTodoList = (todo : string) : void => {
-    const list = [...todoList,todo];
+    const index = todoList.length + 1;
+    const list = [...todoList,{index: index, title: todo}];
     console.log(todo);
     SetTodoList(list);
     console.log(list);
+    SetAddTodo("");
+    
   };
   const renderItem = ({ item }: { item: iTodo }) => (
     <ToDoItem index={item.index} title={item.title} onDelete={()=>removeTodoList(item.index)}> </ToDoItem>
