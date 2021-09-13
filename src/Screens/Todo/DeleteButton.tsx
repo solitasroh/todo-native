@@ -12,11 +12,12 @@ const Icon = styled.Image`
 `;
 
 interface Props{
-  onDelete: ()=>void;
+  index :number;
+  onDelete?: (index : number) => void;
 }
-const DeleteButton: React.FC<Props> = ({ onDelete} : Props) => {
+const DeleteButton: React.FC<Props> = ({index, onDelete} : Props) => {
   return (
-    <DeleteButtonContainer onPress={onDelete}>
+    <DeleteButtonContainer onPress={onDelete(index)}>
       <Icon source={require('@assets/remove.png')}></Icon>
     </DeleteButtonContainer>
   );

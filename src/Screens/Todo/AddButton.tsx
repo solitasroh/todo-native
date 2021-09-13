@@ -1,6 +1,9 @@
-import React from 'react';
-import { ImageURISource } from 'react-native';
+import AuthButton from '@Components/AuthButton';
+import React, { useState } from 'react';
+import { ImageURISource, TextInput } from 'react-native';
 import Styled from 'styled-components/native';
+import TodoInput from './TodoInput';
+import TodoList from './TodoList';
 
 const Container = Styled.SafeAreaView`
     position : absolute;
@@ -13,18 +16,18 @@ const ButtonContainer = Styled.TouchableOpacity`
     box-shadow: 4px 4px 8px #999;
 `;
 
-const Icon = Styled.Image``;
 declare function require(name: string): ImageURISource;
 interface Props {
-  onPress?: () => void;
+  onPress ? :(text : string) => void;
 }
 
-const AddButton: React.FC<Props> = ({ onPress }: Props) => {
+const AddButton: React.FC<Props> = ({onPress }: Props) => {  
+  const [addTodo, SetAddTodo] = useState<boolean>(false);
+
   return (
-    <Container>
-        <ButtonContainer onPress={onPress}>
-          <Icon source={require('@assets/add.png')} />
-        </ButtonContainer>
+    <Container>  
+        <AuthButton label="새로운 할일 추가하기" onPress={()=>SetAddTodo(true)}/>  
+        {SetAddTodo && <TodoInput hideInput={() => SetAddTodo(false)} onPress = {onPress}/>}
       </Container>
   );
 };

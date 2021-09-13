@@ -9,27 +9,27 @@ const List = styled(FlatList)`
   width: 100%;  
   padding: 20px 16px;
 `;
+interface iTodo {
+  index: number;
+  title: string;
+}
 interface Props {
-  todoList : {
-    index: number,
-    title: string,
-  };
-  onDelete?: ()=>void;
+  todoList : iTodo[];
+  onDelete?: (index : number) => void;
 }
 
-const TodoList : React.FC<Props> = () => { 
-  const renderItem = ({ item }: { item: Props }) => (
-    <ToDoItem index={item.todoList.index} title={item.todoList.title} onDelete={()=>item.onDelete}> </ToDoItem>
+const TodoList : React.FC<Props> = ({todoList, onDelete} : Props) => { 
+  const renderItem = ({ item }: { item: iTodo }) => (
+    <ToDoItem index={item.index} title={item.title} onDelete={onDelete}> </ToDoItem>
   );
 
   return (  
       <List
         data={todoList}
         ListEmptyComponent={<EmptyItem />}
-        keyExtractor={(item) => item.index}
+        keyExtractor={(item) => item.index.toString()}
         renderItem={renderItem}
       ></List>
   );
 };
-
 export default TodoList;

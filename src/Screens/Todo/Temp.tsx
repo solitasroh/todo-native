@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
 import TodoList from './TodoList';
 import AddButton from './AddButton';
@@ -34,12 +34,13 @@ const dummytodoList: iTodo[] = [
 ];
 
 const Temp: React.FC = () => {  
-  const [addTodo, SetAddTodo] = useState('');
+  const [todo, SetAddTodo] = useState('');
   const [todoList, SetTodoList] = useState(dummytodoList);
   const removeTodoList = (index : number) : void => {
+    console.log(index);
     let list = [...todoList];
     list.splice(index-1, 1); // 1개만 추출
-    SetTodoList(list);
+    SetTodoList(list);  
   };
   const addTodoList = (todo : string) : void => {
     const index = todoList.length + 1;
@@ -47,7 +48,6 @@ const Temp: React.FC = () => {
     console.log(todo);
     SetTodoList(list);
     console.log(list);
-    SetAddTodo("");
     
   };
   return (
@@ -55,7 +55,7 @@ const Temp: React.FC = () => {
       <Container>
         <HeaderContainer/>
         <TodoList todoList = {todoList} onDelete ={removeTodoList}></TodoList>    
-        <AddButton onPress ={()=>addTodoList(addTodo)}></AddButton>
+        <AddButton onPress={addTodoList}></AddButton>
       </Container>
     </Container>
   );
