@@ -34,20 +34,18 @@ const dummytodoList: iTodo[] = [
 ];
 
 const Temp: React.FC = () => {  
-  const [todo, SetAddTodo] = useState('');
   const [todoList, SetTodoList] = useState(dummytodoList);
-  const removeTodoList = (index : number) : void => {
-    console.log(index);
+  const removeTodoList = (index : number) : void => {   
+    console.log('re index',index);
     let list = [...todoList];
     list.splice(index-1, 1); // 1개만 추출
     SetTodoList(list);  
   };
   const addTodoList = (todo : string) : void => {
     const index = todoList.length + 1;
+    console.log('add index',index);
     const list = [...todoList,{index: index, title: todo}];
-    console.log(todo);
     SetTodoList(list);
-    console.log(list);
     
   };
   return (

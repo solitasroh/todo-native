@@ -17,7 +17,7 @@ interface Props{
 }
 const DeleteButton: React.FC<Props> = ({index, onDelete} : Props) => {
   return (
-    <DeleteButtonContainer onPress={onDelete(index)}>
+    <DeleteButtonContainer onPress={onDelete}>
       <Icon source={require('@assets/remove.png')}></Icon>
     </DeleteButtonContainer>
   );
