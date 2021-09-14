@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState , useEffect} from 'react';
 import { ImageURISource } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -16,8 +16,16 @@ interface Props{
   onDelete?: (index : number) => void;
 }
 const DeleteButton: React.FC<Props> = ({index, onDelete} : Props) => {
+  const [idx, setIndex] = useState(0);
+  useEffect(() => {
+    setIndex(index);
+  }, [])
+  const pressed = () => {
+    if (onDelete != null)
+      onDelete(idx);
+  }
   return (
-    <DeleteButtonContainer onPress={onDelete}>
+    <DeleteButtonContainer onPress={pressed}>
       <Icon source={require('@assets/remove.png')}></Icon>
     </DeleteButtonContainer>
   );

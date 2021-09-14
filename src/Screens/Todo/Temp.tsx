@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
 import TodoList from './TodoList';
@@ -35,16 +35,27 @@ const dummytodoList: iTodo[] = [
 
 const Temp: React.FC = () => {  
   const [todoList, SetTodoList] = useState(dummytodoList);
+  const [totalIndex, SetTotalIndex] = useState(0)
+
+  useEffect(() => {
+    const length = todoList.length;
+    SetTotalIndex(length);
+  }, [])
+
   const removeTodoList = (index : number) : void => {   
     console.log('re index',index);
     let list = [...todoList];
-    list.splice(index-1, 1); // 1개만 추출
+    list = list.filter((item) => item.index != index)
+    
     SetTodoList(list);  
   };
+
   const addTodoList = (todo : string) : void => {
-    const index = todoList.length + 1;
+    const index = totalIndex+1;
+
     console.log('add index',index);
     const list = [...todoList,{index: index, title: todo}];
+    SetTotalIndex(index);
     SetTodoList(list);
     
   };

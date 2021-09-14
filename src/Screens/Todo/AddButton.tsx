@@ -5,11 +5,13 @@ import Styled from 'styled-components/native';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
-const Container = Styled.SafeAreaView`
+const Container = Styled.View`
+    flex-direction: column;
     position : absolute;
     bottom:0;
     align-self:center;
     justify-content:flex-end;
+    
 `;
 
 const ButtonContainer = Styled.TouchableOpacity`
@@ -18,17 +20,20 @@ const ButtonContainer = Styled.TouchableOpacity`
 
 declare function require(name: string): ImageURISource;
 interface Props {
-  onPress ? :(text : string) => void;
+  onPress:(text : string) => void;
 }
 
 const AddButton: React.FC<Props> = ({onPress }: Props) => {  
   const [addTodo, SetAddTodo] = useState<boolean>(false);
-
+  const onPressed = () => {
+    console.log('pressed');
+    SetAddTodo(true)
+  }
   return (
     <Container>  
-        <AuthButton label="새로운 할일 추가하기" onPress={()=>SetAddTodo(true)}/>  
+        <AuthButton label="새로운 할일 추가하기" onPress={onPressed}/>  
         {SetAddTodo && <TodoInput hideInput={() => SetAddTodo(false)} onPress = {onPress}/>}
-      </Container>
+    </Container>
   );
 };
 
