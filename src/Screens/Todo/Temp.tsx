@@ -10,6 +10,7 @@ const Container = styled.SafeAreaView`
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 10px;
 `;
 const HeaderContainer = styled.View`
   height: 40px;
@@ -33,39 +34,36 @@ const dummytodoList: iTodo[] = [
   },
 ];
 
-const Temp: React.FC = () => {  
+const Temp: React.FC = () => {
   const [todoList, SetTodoList] = useState(dummytodoList);
-  const [totalIndex, SetTotalIndex] = useState(0)
+  const [totalIndex, SetTotalIndex] = useState(0);
 
   useEffect(() => {
     const length = todoList.length;
     SetTotalIndex(length);
-  }, [])
+  }, []);
 
-  const removeTodoList = (index : number) : void => {   
-    console.log('re index',index);
+  const removeTodoList = (index: number): void => {
+    console.log('re index', index);
     let list = [...todoList];
-    list = list.filter((item) => item.index != index)
-    
-    SetTodoList(list);  
+    list = list.filter((item) => item.index != index);
+
+    SetTodoList(list);
   };
 
-  const addTodoList = (todo : string) : void => {
-    const index = totalIndex+1;
+  const addTodoList = (todo: string): void => {
+    const index = totalIndex + 1;
 
-    console.log('add index',index);
-    const list = [...todoList,{index: index, title: todo}];
+    console.log('add index', index);
+    const list = [...todoList, { index: index, title: todo }];
     SetTotalIndex(index);
     SetTodoList(list);
-    
   };
   return (
     <Container>
-      <Container>
-        <HeaderContainer/>
-        <TodoList todoList = {todoList} onDelete ={removeTodoList}></TodoList>    
-        <AddButton onPress={addTodoList}></AddButton>
-      </Container>
+      <HeaderContainer />
+      <TodoList todoList={todoList} onDelete={removeTodoList}></TodoList>
+      <AddButton onPress={addTodoList}></AddButton>
     </Container>
   );
 };

@@ -5,31 +5,31 @@ import EmptyItem from './EmptyItem';
 import ToDoItem from './TodoItem';
 
 const List = styled(FlatList)`
-  flex: 1;
-  width: 100%;  
-  padding: 20px 16px;
+  width: 100%;
 `;
 interface iTodo {
   index: number;
   title: string;
 }
 interface Props {
-  todoList : iTodo[];
-  onDelete?: (index : number) => void;
+  todoList: iTodo[];
+  onDelete?: (index: number) => void;
 }
 
-const TodoList : React.FC<Props> = ({todoList, onDelete} : Props) => { 
+const TodoList: React.FC<Props> = ({ todoList, onDelete }: Props) => {
   const renderItem = ({ item }: { item: iTodo }) => (
-    <ToDoItem index={item.index} title={item.title} onDelete={onDelete}> </ToDoItem>
+    <ToDoItem index={item.index} title={item.title} onDelete={onDelete}>
+      {' '}
+    </ToDoItem>
   );
 
-  return (  
-      <List
-        data={todoList}
-        ListEmptyComponent={<EmptyItem />}
-        keyExtractor={(item) => item.index.toString()}
-        renderItem={renderItem}
-      ></List>
+  return (
+    <List
+      data={todoList}
+      ListEmptyComponent={<EmptyItem />}
+      keyExtractor={(item) => item.index.toString()}
+      renderItem={renderItem}
+    ></List>
   );
 };
 export default TodoList;

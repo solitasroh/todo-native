@@ -5,17 +5,17 @@ import DeleteButton from './DeleteButton';
 interface TodoStuff {
   title: string;
   index: number;
-  onDelete? : (index : number) => void;
+  onDelete?: (index: number) => void;
 }
 
 const ItemContainer = styled.View`
   flex-direction: row;
   background-color: #eee;
-  margin: 4px 16px;
-  padding: 8px 16px;
   border-radius: 8px;
   align-items: center;
   width: 100%;
+  margin-bottom: 10px;
+  padding: 16px 10px;
 `;
 
 const TitleLabel = styled.Text`
@@ -24,11 +24,11 @@ const TitleLabel = styled.Text`
   color: black;
 `;
 
-const ToDoItem = ({ title, index , onDelete }: TodoStuff) => {
+const ToDoItem = ({ title, index, onDelete }: TodoStuff) => {
   return (
     <ItemContainer>
       <TitleLabel>{title}</TitleLabel>
-      <DeleteButton index = {index} onDelete = {onDelete} ></DeleteButton>
+      <DeleteButton index={index} onDelete={onDelete}></DeleteButton>
     </ItemContainer>
   );
 };
