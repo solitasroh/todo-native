@@ -3,6 +3,8 @@ import { Button, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar as Cal, CalendarList, Agenda } from 'react-native-calendars';
 import { FlatList } from 'react-native-gesture-handler';
+import { iTodo } from '@Screens/ITodo';
+import TodoDatas from '@Utils/DummyData';
 
 const markedDate = (date: Date) => {
   const dateFormat = date.toISOString().split('-');
@@ -10,17 +12,6 @@ const markedDate = (date: Date) => {
     dateFormat[0] + '-' + dateFormat[1] + '-' + dateFormat[2].slice(0, 2);
   return markedDate;
 };
-interface iTodo {
-  index: number;
-  contents: string;
-}
-const data: iTodo[] = [
-  { index: 1, contents: 'todo-item1' },
-  {
-    index: 2,
-    contents: 'todo-item2',
-  },
-];
 
 const Calendar = () => {
   const today = markedDate(new Date());
@@ -40,9 +31,9 @@ const Calendar = () => {
       />
 
       <FlatList
-        data={data}
+        data={TodoDatas}
         renderItem={({ item }: { item: iTodo }) => {
-          return <Text>{item.contents}</Text>;
+          return <Text>{item.title}</Text>;
         }}
       ></FlatList>
 

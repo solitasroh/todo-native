@@ -1,3 +1,4 @@
+import { iTodo } from '@Screens/ITodo';
 import React from 'react';
 import { FlatList, Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
@@ -7,10 +8,7 @@ import ToDoItem from './TodoItem';
 const List = styled(FlatList)`
   width: 100%;
 `;
-interface iTodo {
-  index: number;
-  title: string;
-}
+
 interface Props {
   todoList: iTodo[];
   onDelete?: (index: number) => void;

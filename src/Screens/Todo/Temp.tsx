@@ -3,6 +3,7 @@ import { Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
 import TodoList from './TodoList';
 import AddButton from './AddButton';
+import TodoDatas from '@Utils/DummyData';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -18,24 +19,8 @@ const HeaderContainer = styled.View`
   align-items: center;
 `;
 
-interface iTodo {
-  index: number;
-  title: string;
-}
-
-const dummytodoList: iTodo[] = [
-  {
-    index: 1,
-    title: 'todo1',
-  },
-  {
-    index: 2,
-    title: 'todo2',
-  },
-];
-
 const Temp: React.FC = () => {
-  const [todoList, SetTodoList] = useState(dummytodoList);
+  const [todoList, SetTodoList] = useState(TodoDatas);
   const [totalIndex, SetTotalIndex] = useState(0);
 
   useEffect(() => {
