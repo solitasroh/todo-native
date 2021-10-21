@@ -3,21 +3,27 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Welcome from './Login/Welcome';
 import Temp from './Todo/Temp';
+import Calendar from './Calendar/Calendar';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Profile from './Profile/Profile';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const MainNavigator: React.FC = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Temp"
-        component={Temp}
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Temp} />
+      <Tab.Screen
+        name="Calendar"
+        component={Calendar}
         options={{
-          title: 'Temp',
+          title: 'Calendar',
           headerShown: false,
         }}
       />
-    </Stack.Navigator>
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
   );
 };
 
